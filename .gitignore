@@ -1,2 +1,11 @@
 /.vs
 /.vscode
+
+# middle files
+*.c
+*.h
+*.c.h
+*.i
+
+# executables
+*.exe
