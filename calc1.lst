@@ -1,0 +1,99 @@
+GnuCOBOL 3.2.0          C:\Users\Sina\source Mon Sep 08 2025 14:56:11  Page 0001
+
+LINE    PG/LN  A...B............................................................
+
+000001         identification division.
+000002         program-id. calculator.
+000003
+000004         *> ----------
+000005
+000006         data division.
+000007         working-storage section.
+000008         01 num1 PIC S9(5)V99 . *> signed numeric with 5 digits and 2 deci
+000009         01 num2 PIC S9(5)V99 .
+000010         01 outnum PIC S9(9)V99 .
+000011         01 operation PIC 9(1) .
+000012
+000013         *> ----------
+000014         procedure division.
+000015          *>    display "starting...".
+000016             perform select-operation.
+000017             perform get-inputs.
+000018             display "result: "  outnum.
+000019             perform select-operation.
+000020             goback .
+000021
+000022             select-operation.
+000023                 display "select your operation:".
+000024                 display "0. EXIT"
+000025                 display "1. +-" .
+000026                 display "2. */".
+000027                 accept operation.
+000028                 if operation = 0
+000029                    stop run
+000030                 end-if
+000031                 exit .
+000032
+000033             calculate.
+000034                 evaluate true
+000035                     when operation = 1
+000036                            compute outnum = (num1 + num2)
+000037                     when operation = 2
+000038                            compute outnum = (num1 * num2)
+000039                     when other
+000040                         perform get-inputs
+000041                        continue
+000042                 end-evaluate.
+000043                 exit.
+000044             get-inputs.
+000045                 evaluate true
+000046                     when operation = 1
+000047                         display "a + b"
+000048                         display "input a:"
+000049                      *>   if
+000050                      *> safe inputs
+000051                        accept num1
+000052                        display "input b:"
+GnuCOBOL 3.2.0          C:\Users\Sina\source Mon Sep 08 2025 14:56:11  Page 0002
+
+LINE    PG/LN  A...B............................................................
+
+000053                        accept num2
+000054                        perform calculate
+000055                     when operation = 2
+000056                        display "a * b"
+000057                        display "input a:"
+000058                      *>   if
+000059                      *> safe inputs
+000060                        accept num1
+000061                        display "input b:"
+000062                        accept num2
+000063                        perform calculate
+000064                     when other
+000065                         display "invalid operation. try again."
+000066                         perform select-operation
+000067                 end-evaluate.
+000068                 exit.
+000069
+000070
+GnuCOBOL 3.2.0          C:\Users\Sina\source Mon Sep 08 2025 14:56:11  Page 0003
+
+NAME                           DEFINED                REFERENCES
+
+num1                           8        36      38     *51     *60     x4
+num2                           9        36      38     *53     *62     x4
+outnum                         10       18     *36     *38             x3
+operation                      11      *27      28      35      37      46
+                                        55                             x6
+
+GnuCOBOL 3.2.0          C:\Users\Sina\source Mon Sep 08 2025 14:56:11  Page 0004
+
+LABEL                          DEFINED                REFERENCES
+
+E calculator                   16
+P select-operation             22       16      19      66             x3
+P calculate                    33       54      63                     x2
+P get-inputs                   44       17      40                     x2
+
+0 warnings in compilation group
+0 errors in compilation group
