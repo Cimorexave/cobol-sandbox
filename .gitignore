@@ -9,3 +9,6 @@
 
 # executables
 *.exe
+
+# report lists
+/lists
