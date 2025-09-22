@@ -6,6 +6,7 @@
 *.h
 *.c.h
 *.i
+*.dll
 
 # executables
 *.exe
